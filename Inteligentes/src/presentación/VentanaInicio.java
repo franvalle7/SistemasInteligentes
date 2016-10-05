@@ -1,134 +1,151 @@
 package presentación;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.io.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class VentanaInicio extends JFrame implements ActionListener {
-	private JTextField columnas,filas;
-	JPanelImagen panel;
-	String col, fil;
-	int m,n;
-	BufferedImage img;
-	JButton btnJugar;
-	
-	public VentanaInicio(BufferedImage img){
-		super("Puzzle");
-		this.img=img;
-		getContentPane().setLayout(null);
-		setSize(img.getWidth(),img.getHeight());
-		
-		initialice();
-	}
-	
-	public void initialice(){
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		splitPane.setSize(img.getWidth(),img.getHeight());
-		getContentPane().add(splitPane);
-		
-		JPanelImagen panel_1 = new JPanelImagen(img);
-		splitPane.setRightComponent(panel_1);
-		panel_1.setSize(img.getWidth(), img.getHeight());
-       
-		JPanel panel_2 =new JPanel();
-		
-        JLabel lblNewLabel = new JLabel("Numero de columnas:");
-    	lblNewLabel.setBackground(Color.BLACK);
-    	lblNewLabel.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
-    	panel_2.add(lblNewLabel);
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+
+
+public class VentanaInicio extends JFrame implements ActionListener{
+	JMenuBar menubar;	 
+    JMenu menu; 
+    JMenuItem itemAbrir, itemSalir;
+    private BufferedImage imagen;
+    JPanelImagen panel=null;
+    VentanaJuego frame;
+    private JLabel lblNewLabel;
+    private JPanel panel_1;
+    private JLabel lblColumnas;
+    private JTextField textColum;
+    private JLabel lblFilas;
+    private JTextField textFilas;
+    private JButton btnIniciar;
+    private JLabel label;
+    int m=4,n=4;
+    
+    public VentanaInicio(){
+    	super("Seleccionar Imagen");
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaInicio.class.getResource("/resources/1475593196364404541620.jpg")));
+    	getContentPane().setBackground(Color.DARK_GRAY);
     	
-    	columnas = new JTextField();
-    	//columnas.setBounds(286, 114, 43, 20);
-    	panel_2.add(columnas);
-    	columnas.setColumns(10);
+    	lblNewLabel = new JLabel("   Presiona Inicio para cargar una imagen");
+    	lblNewLabel.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 11));
+    	lblNewLabel.setForeground(Color.WHITE);
+    	getContentPane().add(lblNewLabel, BorderLayout.NORTH);
     	
-    	JLabel lblNewLabel_1 = new JLabel("Numero de filas:");
-    	lblNewLabel_1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
-    	lblNewLabel_1.setBounds(82, 156, 175, 14);
-    	panel_2.add(lblNewLabel_1);
+    	panel_1 = new JPanel();
+    	panel_1.setBackground(Color.DARK_GRAY);
+    	getContentPane().add(panel_1, BorderLayout.CENTER);
+    	panel_1.setLayout(new GridLayout(2, 3, 0, 0));
     	
-    	filas = new JTextField();
-    	filas.setBounds(286, 153, 43, 20);
-    	panel_2.add(filas);
-    	filas.setColumns(10);
+    	lblColumnas = new JLabel("Columnas:");
+    	lblColumnas.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblColumnas.setForeground(Color.WHITE);
+    	lblColumnas.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 11));
+    	panel_1.add(lblColumnas);
     	
-    	btnJugar = new JButton("JUGAR");
-    	btnJugar.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 11));
-    	btnJugar.setBounds(800, 113, 89, 23);
-    	panel_2.add(btnJugar);
-    	btnJugar.addActionListener(this);
+    	textColum = new JTextField();
+    	textColum.setToolTipText("Introduzca las columnas del puzzle");
+    	textColum.setSize(new Dimension(20, 20));
+    	textColum.setHorizontalAlignment(SwingConstants.CENTER);
+    	panel_1.add(textColum);
+    	textColum.setColumns(1);
     	
-        splitPane.setLeftComponent(panel_2);
-		
-		
-		/*panel = new JPanelImagen(img);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1013,688);
-		//setResizable(false);
-		setContentPane(panel);
-		
-		JLabel lblNewLabel = new JLabel("Numero de columnas:");
-    	lblNewLabel.setBackground(Color.BLACK);
-    	lblNewLabel.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
-    	lblNewLabel.setBounds(82, 116, 194, 14);
-    	getContentPane().add(lblNewLabel);
-    	
-    	JLabel lblNewLabel_1 = new JLabel("Numero de filas:");
-    	lblNewLabel_1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
-    	lblNewLabel_1.setBounds(82, 156, 175, 14);
-    	getContentPane().add(lblNewLabel_1);
-    	
-    	columnas = new JTextField();
-    	columnas.setBounds(286, 114, 43, 20);
-    	getContentPane().add(columnas);
-    	columnas.setColumns(10);
-    	col=columnas.getText();
-    	
-    	filas = new JTextField();
-    	filas.setBounds(286, 153, 43, 20);
-    	getContentPane().add(filas);
-    	filas.setColumns(10);
-    	fil=filas.getText();
+    	label = new JLabel("");
+    	panel_1.add(label);
     	
     	
-    	JLabel lblNota2 = new JLabel("y las filas que tendr\u00E1 el puzzle");
-    	lblNota2.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 13));
-    	lblNota2.setBounds(82, 60, 247, 14);
-    	getContentPane().add(lblNota2);
     	
-    	JLabel lblNota1 = new JLabel("Introduce las columnas");
-    	lblNota1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 13));
-    	lblNota1.setBounds(82, 42, 247, 14);
-    	getContentPane().add(lblNota1);
+    	lblFilas = new JLabel("Filas:");
+    	lblFilas.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblFilas.setForeground(Color.WHITE);
+    	lblFilas.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 11));
+    	panel_1.add(lblFilas);
     	
-    	btnJugar = new JButton("JUGAR");
-    	btnJugar.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 11));
-    	btnJugar.setBounds(800, 113, 89, 23);
-    	getContentPane().add(btnJugar);
-    	btnJugar.addActionListener(this);*/
-		
-		
-	}
+    	textFilas = new JTextField();
+    	textFilas.setToolTipText("Introduzca las filas del puzzle");
+    	textFilas.setHorizontalAlignment(SwingConstants.CENTER);
+    	panel_1.add(textFilas);
+    	textFilas.setColumns(10);
+    	
+    	btnIniciar = new JButton("Iniciar");
+    	btnIniciar.setEnabled(false);
+    	panel_1.add(btnIniciar);
+    	setSize(300, 200);
+    	
+	    menubar=new JMenuBar();
+	    menubar.setBackground(Color.LIGHT_GRAY);
+	    menubar.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
+	    menu=new JMenu("Inicio");
+	    menu.setToolTipText("Cargar Imagen");
+	    itemAbrir= new JMenuItem("Abrir Imagen");
+	    itemSalir= new JMenuItem("Salir");
+	    
+	    menu.add(itemAbrir);
+	    menu.add(itemSalir);
+	    menubar.add(menu);
+	    setJMenuBar(menubar);
+	    
+	    itemAbrir.addActionListener(this);
+	    itemSalir.addActionListener(this);
+	    btnIniciar.addActionListener(this);
+	    
+    }
+    
+    public void cargarImagen() throws IOException{
+    	FileInputStream fis = null;    	 
+        File file = null;
+        
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("PNG & JPG","png", "jpg");
+        jfc.setFileFilter(filtroImagen);
+        int resultado = jfc.showOpenDialog(this);
+        if (resultado == jfc.APPROVE_OPTION) {
+            file = jfc.getSelectedFile();
+        }
+
+        fis = new FileInputStream(file);
+        imagen = ImageIO.read(fis);
+        btnIniciar.setEnabled(true);          
+        
+    }	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==(btnJugar)) {
-			dispose();
-            VentanaJuego ventanajuego=null;
+		if(e.getSource()==(itemAbrir)){
 			try {
-				ventanajuego = new VentanaJuego(img, m,n);
+				cargarImagen();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}else if (e.getSource() == itemSalir) { 
+            System.exit(0);
+ 
+        }else if(e.getSource()== btnIniciar){
+        	
+			try {
+				frame = new VentanaJuego(imagen,n,m);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			ventanajuego.setVisible(true);
-            
+            frame.setVisible(true);
+            dispose();
         }
-		
-	}
+	}     
+    
 }
+	

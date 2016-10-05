@@ -4,18 +4,33 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-public class Casilla extends JButton {
+import presentación.JPanelImagen;
+
+public class Casilla extends JPanelImagen {
+	BufferedImage img;
+	int id, x, y;
 	
-	public Casilla(int x, int y, BufferedImage img) {
+	public Casilla(int x, int y,BufferedImage img) {
+		super(img);
+		this.img=img;
+		this.x = x;
+		this.y = y;
+		
+		setOpaque(true);
+		
+		
+	}
+	
+	/*public Casilla( BufferedImage img) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		setIcon(new ImageIcon(img));
 		setOpaque(true);
-	}
+	}*/
 
-	int id, x, y;
+	
 
 	public int getId() {
 		return id;
