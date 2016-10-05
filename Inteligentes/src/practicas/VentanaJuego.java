@@ -15,6 +15,7 @@ public class VentanaJuego extends JFrame{
 	public VentanaJuego(BufferedImage img, int m, int n) throws IOException {
 		super("JUGANDO");
 		setSize(img.getWidth()-40,img.getHeight());
+		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 		this.img=img;
