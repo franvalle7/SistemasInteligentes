@@ -1,4 +1,4 @@
-package practicas;
+package presentación;
 
 
 import java.awt.*;

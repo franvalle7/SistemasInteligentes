@@ -1,4 +1,4 @@
-package practicas;
+package presentación;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
+
+import dominio.Casilla;
 
 public class JPanelJuego extends JPanel implements ActionListener{
 

@@ -1,4 +1,4 @@
-package practicas;
+package presentación;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.BorderLayout;

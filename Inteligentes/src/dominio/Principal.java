@@ -1,4 +1,6 @@
-package practicas;
+package dominio;
+
+import presentación.VentanaPrincipal;
 
 public class Principal {
 	

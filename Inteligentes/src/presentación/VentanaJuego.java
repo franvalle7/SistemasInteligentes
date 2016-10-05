@@ -1,4 +1,4 @@
-package practicas;
+package presentación;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

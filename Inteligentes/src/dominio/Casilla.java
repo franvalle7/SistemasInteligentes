@@ -1,4 +1,4 @@
-package practicas;
+package dominio;
 
 import java.awt.image.BufferedImage;
 
