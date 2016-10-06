@@ -18,7 +18,6 @@ public class Casilla extends JPanelImagen {
 		this.img=img;
 		this.x = x;
 		this.y = y;
-		
 		setOpaque(true);
 		
 		
@@ -27,7 +26,6 @@ public class Casilla extends JPanelImagen {
 		super();
 		this.x = x;
 		this.y = y;
-		
 		setOpaque(true);
 		
 		

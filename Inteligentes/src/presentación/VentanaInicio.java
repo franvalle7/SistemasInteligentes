@@ -35,7 +35,7 @@ public class VentanaInicio extends JFrame implements ActionListener{
     private JTextField textFilas;
     private JButton btnIniciar;
     private JLabel label;
-    int m,n;
+    int m=-1,n=-1;
     
     public VentanaInicio(){
     	super("Seleccionar Imagen");
@@ -61,7 +61,6 @@ public class VentanaInicio extends JFrame implements ActionListener{
     	panel_1.add(lblColumnas);
     	
     	textColum = new JTextField();
-    	textColum.setToolTipText("Tama\u00F1o 3x3 m\u00EDnimo");
     	textColum.setSize(new Dimension(20, 20));
     	textColum.setHorizontalAlignment(SwingConstants.CENTER);
     	panel_1.add(textColum);
@@ -80,7 +79,6 @@ public class VentanaInicio extends JFrame implements ActionListener{
     	panel_1.add(lblFilas);
     	
     	textFilas = new JTextField();
-    	textFilas.setToolTipText("Tama\u00F1o 3x3 m\u00EDnimo");
     	textFilas.setHorizontalAlignment(SwingConstants.CENTER);
     	panel_1.add(textFilas);
     	textFilas.setColumns(10);
@@ -140,20 +138,28 @@ public class VentanaInicio extends JFrame implements ActionListener{
             System.exit(0);
  
         }else if(e.getSource()== btnIniciar){
-
-			m=Integer.parseInt(textColum.getText());
-			n=Integer.parseInt(textFilas.getText());
-			if(m>=3 && n>=3){
+        	try{
+				m=Integer.parseInt(textColum.getText());
+				n=Integer.parseInt(textFilas.getText());
+        	}catch(java.lang.NumberFormatException e2){
+        	//	JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar un tamaño mínimo\n de 3 filas por 3 columnas", "Error", JOptionPane.INFORMATION_MESSAGE);
+        	}
+			
+			if(m>=3 || n>=3){
 				try {
 					frame = new VentanaJuego(imagen,n,m);
+					frame.setVisible(true);
+		            dispose();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}else{
+				JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar un tamaño mínimo\n de 3 filas por 3 columnas", "Error", JOptionPane.INFORMATION_MESSAGE);
+				textColum.setText("");
+				textFilas.setText("");
 			}
-            frame.setVisible(true);
-            dispose();
-        }
+        }	
 	}     
     
 }

@@ -21,6 +21,7 @@ public class JPanelJuego extends JPanel {
 		miniImages=m*n;
 		casillas= new Casilla[m][n];
 		setLayout(new GridLayout(m,n,0,0));
+		setBackground(Color.DARK_GRAY);
 		initialice();
 	}
 	

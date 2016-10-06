@@ -1,5 +1,13 @@
 package dominio;
 
-public class Juego {
+import presentación.VentanaInicio;
 
+public class Juego {
+	
+	public Juego(){
+		VentanaInicio panel = new VentanaInicio();
+		panel.setVisible(true);
+	}
+	
+	
 }
