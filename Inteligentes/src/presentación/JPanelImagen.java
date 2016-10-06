@@ -18,6 +18,11 @@ public class JPanelImagen extends JPanel  {
          }
     	
     }
+    
+    public JPanelImagen() {
+    	setLayout(null);
+    	setBackground(Color.BLACK);
+    }
  
     public void setImagen(BufferedImage nuevaImagen) {
         imagen = nuevaImagen;

@@ -6,18 +6,23 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VentanaJuego extends JFrame{
+public class VentanaJuego extends JFrame implements ActionListener{
 	BufferedImage imgs[];
 	BufferedImage img;
+	JMenuBar menubar;
+	JMenu menu;
+	JMenuItem itemAbrir,itemSalir;
 	int n,m,ancho,alto;
 	
 	public VentanaJuego(BufferedImage img, int m, int n) throws IOException {
 		super("JUGANDO");
-		setSize(img.getWidth(),img.getHeight()+30);
+		setSize(img.getWidth(),img.getHeight()+40);
 		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(true);
+        setResizable(false);
 		this.img=img;
 		this.m=m;
 		this.n=n;
@@ -46,7 +51,7 @@ public class VentanaJuego extends JFrame{
         }
 
         
-        System.out.println("Splitting done");
+        /*System.out.println("Splitting done");
 
         //writing mini images into image files
         for (int i = 0; i < imgs.length; i++) {
@@ -57,7 +62,7 @@ public class VentanaJuego extends JFrame{
 				e.printStackTrace();
 			}
         }
-        System.out.println("Mini images created");
+        System.out.println("Mini images created");*/
         
         
 	}
@@ -71,6 +76,34 @@ public class VentanaJuego extends JFrame{
 		
         JPanelJuego panel=new JPanelJuego(m,n,imgs);
 		setContentPane(panel);
+		
+		menubar = new JMenuBar();
+	    menubar.setBackground(Color.LIGHT_GRAY);
+	    menubar.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 12));
+	    menu = new JMenu("Inicio");
+	    itemAbrir = new JMenuItem("Nueva Partida");
+	    itemSalir = new JMenuItem("Salir");
+	    
+	    menu.add(itemAbrir);
+	    menu.add(itemSalir);
+	    menubar.add(menu);
+	    setJMenuBar(menubar);
+	    
+	    itemAbrir.addActionListener(this);
+	    itemSalir.addActionListener(this);
         
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == itemSalir) { 
+            System.exit(0);
+ 
+        }else if(e.getSource()==itemAbrir){
+        	VentanaInicio frame = new VentanaInicio();
+        	frame.setVisible(true);
+        	dispose();
+        }
+		
 	}
 }

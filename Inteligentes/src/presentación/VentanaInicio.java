@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.Point;
 
 
 public class VentanaInicio extends JFrame implements ActionListener{
@@ -34,10 +35,12 @@ public class VentanaInicio extends JFrame implements ActionListener{
     private JTextField textFilas;
     private JButton btnIniciar;
     private JLabel label;
-    int m=4,n=4;
+    int m,n;
     
     public VentanaInicio(){
     	super("Seleccionar Imagen");
+    	setTitle("Configurar Tablero");
+    	setResizable(false);
     	setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaInicio.class.getResource("/resources/1475593196364404541620.jpg")));
     	getContentPane().setBackground(Color.DARK_GRAY);
     	
@@ -58,11 +61,12 @@ public class VentanaInicio extends JFrame implements ActionListener{
     	panel_1.add(lblColumnas);
     	
     	textColum = new JTextField();
-    	textColum.setToolTipText("Introduzca las columnas del puzzle");
+    	textColum.setToolTipText("Tama\u00F1o 3x3 m\u00EDnimo");
     	textColum.setSize(new Dimension(20, 20));
     	textColum.setHorizontalAlignment(SwingConstants.CENTER);
     	panel_1.add(textColum);
     	textColum.setColumns(1);
+    	
     	
     	label = new JLabel("");
     	panel_1.add(label);
@@ -76,10 +80,11 @@ public class VentanaInicio extends JFrame implements ActionListener{
     	panel_1.add(lblFilas);
     	
     	textFilas = new JTextField();
-    	textFilas.setToolTipText("Introduzca las filas del puzzle");
+    	textFilas.setToolTipText("Tama\u00F1o 3x3 m\u00EDnimo");
     	textFilas.setHorizontalAlignment(SwingConstants.CENTER);
     	panel_1.add(textFilas);
     	textFilas.setColumns(10);
+    	
     	
     	btnIniciar = new JButton("Iniciar");
     	btnIniciar.setEnabled(false);
@@ -135,12 +140,16 @@ public class VentanaInicio extends JFrame implements ActionListener{
             System.exit(0);
  
         }else if(e.getSource()== btnIniciar){
-        	
-			try {
-				frame = new VentanaJuego(imagen,n,m);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+
+			m=Integer.parseInt(textColum.getText());
+			n=Integer.parseInt(textFilas.getText());
+			if(m>=3 && n>=3){
+				try {
+					frame = new VentanaJuego(imagen,n,m);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
             frame.setVisible(true);
             dispose();

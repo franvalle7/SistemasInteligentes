@@ -1,5 +1,6 @@
 package dominio;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -12,9 +13,18 @@ public class Casilla extends JPanelImagen {
 	BufferedImage img;
 	int id, x, y;
 	
-	public Casilla(int x, int y,BufferedImage img) {
+	public Casilla(int id,int x, int y,BufferedImage img) {
 		super(img);
 		this.img=img;
+		this.x = x;
+		this.y = y;
+		
+		setOpaque(true);
+		
+		
+	}
+	public Casilla(int id, int x, int y) {
+		super();
 		this.x = x;
 		this.y = y;
 		
