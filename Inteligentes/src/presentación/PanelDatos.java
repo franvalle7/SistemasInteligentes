@@ -15,10 +15,10 @@ import javax.swing.SwingConstants;
 public class PanelDatos extends JPanel implements ActionListener {
 	private JTextField textColum;
 	private JTextField textFilas;
-	JButton btnIniciar;
-	BufferedImage img;
-	int m=2;
-	int n=2;
+	private JButton btnIniciar;
+	private BufferedImage img;
+	private int m=2;
+	private int n=2;
 
 	/**
 	 * Create the panel.

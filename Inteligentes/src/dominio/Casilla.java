@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import presentación.JPanelImagen;
 
 public class Casilla extends JPanelImagen {
-	BufferedImage img;
-	int id, x, y;
+	private BufferedImage img;
+	private int id, x, y;
 	
 	public Casilla(int id,int x, int y,BufferedImage img) {
 		super(img);

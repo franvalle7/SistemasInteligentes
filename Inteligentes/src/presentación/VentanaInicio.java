@@ -21,21 +21,16 @@ import java.awt.Point;
 
 
 public class VentanaInicio extends JFrame implements ActionListener{
-	JMenuBar menubar;	 
-    JMenu menu; 
-    JMenuItem itemAbrir, itemSalir;
+	private JMenuBar menubar;	 
+	private JMenu menu; 
+    private JMenuItem itemAbrir, itemSalir;
     private BufferedImage imagen;
-    JPanelImagen panel=null;
-    VentanaJuego frame;
-    private JLabel lblNewLabel;
+    private VentanaJuego juego;
     private JPanel panel_1;
-    private JLabel lblColumnas;
-    private JTextField textColum;
-    private JLabel lblFilas;
-    private JTextField textFilas;
+    private JLabel lblFilas,lblColumnas,lblNewLabel,label;
+    private JTextField textFilas,textColum;
     private JButton btnIniciar;
-    private JLabel label;
-    int m=-1,n=-1;
+    private int m=-1,n=-1;
     
     public VentanaInicio(){
     	super("Seleccionar Imagen");
@@ -147,8 +142,8 @@ public class VentanaInicio extends JFrame implements ActionListener{
 			
 			if(m>=3 || n>=3){
 				try {
-					frame = new VentanaJuego(imagen,n,m);
-					frame.setVisible(true);
+					juego = new VentanaJuego(imagen,n,m);
+					juego.setVisible(true);
 		            dispose();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

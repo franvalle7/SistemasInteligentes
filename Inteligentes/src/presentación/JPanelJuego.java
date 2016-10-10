@@ -3,16 +3,14 @@ package presentación;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
-import java.util.Random;
-
 import javax.swing.*;
 import dominio.*;
 
 public class JPanelJuego extends JPanel {
 
-	Casilla casillas[][];
-	BufferedImage imgs[];
-	int n,m, miniImages,ancho,alto, rand,aleatorios[];
+	private Casilla casillas[][];
+	private BufferedImage imgs[];
+	private int n,m, miniImages,ancho,alto, aleatorios[];
 	
 	public JPanelJuego(int m, int n, BufferedImage [] imgs){
 		this.imgs=imgs;
@@ -26,7 +24,6 @@ public class JPanelJuego extends JPanel {
 	}
 	
 	public void initialice(){
-		Random r= new Random();
 		aleatorios=new int[imgs.length];
 		for(int i=0;i<aleatorios.length;i++){
 			aleatorios[i]=0;

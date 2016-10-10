@@ -1,8 +1,6 @@
 package presentación;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.awt.*;
@@ -10,12 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaJuego extends JFrame implements ActionListener{
-	BufferedImage imgs[];
-	BufferedImage img;
-	JMenuBar menubar;
-	JMenu menu;
-	JMenuItem itemAbrir,itemSalir;
-	int n,m,ancho,alto;
+	private BufferedImage imgs[];
+	private BufferedImage img;
+	private JMenuBar menubar;
+	private JMenu menu;
+	private JMenuItem itemAbrir,itemSalir;
+	private int n,m,ancho,alto;
 	
 	public VentanaJuego(BufferedImage img, int m, int n) throws IOException {
 		super("JUGANDO");
